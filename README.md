@@ -1,4 +1,4 @@
-VSSQTestTrackPlugin 
+VSSQTestTrackPlugin [![Build status](https://ci.appveyor.com/api/projects/status/x50cix18lypu83e1?svg=true)](https://ci.appveyor.com/project/jorgecosta/vssqtesttrackplugin)
 =========
 
 VSSQTestTrackPlugin - Plugin for VSSonarQubeExtension - Supports TestTrack Issue Tracker
