@@ -60,9 +60,9 @@
     <None Include="TestTrackIntegration.Test.licenseheader" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TeskTrackIntegration\TestTrackIntegration.csproj">
+    <ProjectReference Include="..\TeskTrackIntegration\TestTrackConnector.csproj">
       <Project>{16813650-e584-482d-830b-6719fbf0f4f2}</Project>
-      <Name>TestTrackIntegration</Name>
+      <Name>TestTrackConnector</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@
 // 
 #pragma warning disable 1591
 
-namespace TestTrackIntegration
+namespace TestTrackConnector
 {
     using System;
     using System.Web.Services;

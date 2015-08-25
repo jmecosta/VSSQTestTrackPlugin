@@ -18,6 +18,7 @@ namespace TestTrackIntegration.Test
     using NUnit.Framework;
     using System.IO;
     using System.Reflection;
+    using TestTrackConnector;
 
     /// <summary>
     /// Tests the Git Plugin.

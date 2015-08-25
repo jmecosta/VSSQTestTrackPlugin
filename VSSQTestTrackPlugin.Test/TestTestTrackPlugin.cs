@@ -14,17 +14,15 @@
 
 namespace SQGitPlugin.Test
 {
-    using System;
     using System.IO;
     using System.Reflection;
 
     using NUnit.Framework;
     using VSSonarPlugins;
     using Moq;
-    using System.Linq;
     using VSSQTestTrackPlugin;
-    using TestTrackIntegration;
     using VSSonarPlugins.Types;
+    using TestTrackConnector;
 
     /// <summary>
     /// Tests the Git Plugin.

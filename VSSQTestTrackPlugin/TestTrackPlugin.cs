@@ -22,7 +22,7 @@ namespace VSSQTestTrackPlugin
     using System.Text.RegularExpressions;
     using VSSonarPlugins;
     using VSSonarPlugins.Types;
-    using TestTrackIntegration;
+    using TestTrackConnector;
     using System.Text;
 
     /// <summary>

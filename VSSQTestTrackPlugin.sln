@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSSQTestTrackPlugin", "VSSQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSSQTestTrackPlugin.Test", "VSSQTestTrackPlugin.Test\VSSQTestTrackPlugin.Test.csproj", "{C064CAA3-1B30-41AF-B534-7A4D9B71FE89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTrackIntegration", "TeskTrackIntegration\TestTrackIntegration.csproj", "{16813650-E584-482D-830B-6719FBF0F4F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTrackConnector", "TeskTrackIntegration\TestTrackConnector.csproj", "{16813650-E584-482D-830B-6719FBF0F4F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTrackIntegration.Test", "TestTrackIntegration.Test\TestTrackIntegration.Test.csproj", "{D36ED258-B8BA-485A-B08B-65046AE8BA9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTrackConnector.Test", "TestTrackIntegration.Test\TestTrackConnector.Test.csproj", "{D36ED258-B8BA-485A-B08B-65046AE8BA9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

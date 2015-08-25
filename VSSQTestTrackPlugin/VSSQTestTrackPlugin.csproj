@@ -38,37 +38,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\References\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="MahApps.Metro">
-      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.49.0\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\References\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Licensing">
-      <HintPath>..\References\Rhino.Licensing.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="VSSonarPlugins, Version=$(VSSonarExtensionVersion), Culture=neutral, processorArchitecture=MSIL">
@@ -89,14 +66,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TeskTrackIntegration\TestTrackIntegration.csproj">
+    <ProjectReference Include="..\TeskTrackIntegration\TestTrackConnector.csproj">
       <Project>{16813650-e584-482d-830b-6719fbf0f4f2}</Project>
-      <Name>TestTrackIntegration</Name>
+      <Name>TestTrackConnector</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="VSSQTestTrackPlugin.licenseheader" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
@@ -104,14 +80,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildFolder)\AssemblyPatcherTask.targets" />
   <PropertyGroup>
-    <PackageFiles>$(OutputPath)$(AssemblyName).dll;$(OutputPath)TestTrackIntegration.dll</PackageFiles>
+    <PackageFiles>$(OutputPath)$(AssemblyName).dll;$(OutputPath)TestTrackConnector.dll</PackageFiles>
   </PropertyGroup>
   <Import Project="$(MSBuildFolder)\CreatePlugin.targets" />
-  <Import Project="..\packages\Fody.1.28.1\build\Fody.targets" Condition="Exists('..\packages\Fody.1.28.1\build\Fody.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.28.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.28.1\build\Fody.targets'))" />
-  </Target>
 </Project>

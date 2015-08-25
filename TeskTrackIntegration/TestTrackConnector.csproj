@@ -10,8 +10,8 @@
     <ProjectGuid>{16813650-E584-482D-830B-6719FBF0F4F2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestTrackIntegration</RootNamespace>
-    <AssemblyName>TestTrackIntegration</AssemblyName>
+    <RootNamespace>TestTrackConnector</RootNamespace>
+    <AssemblyName>TestTrackConnector</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <SccProjectName>
