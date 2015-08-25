@@ -243,7 +243,6 @@ namespace VSSQTestTrackPlugin
         /// </summary>
         /// <param name="commitMessage">The commit message.</param>
         /// <returns></returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public Defect GetDefectFromCommitMessage(string commitMessage)
         {
             string [] splitArray = { "feature/", "bugfix/"};

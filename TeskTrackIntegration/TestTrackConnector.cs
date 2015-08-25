@@ -119,6 +119,8 @@ namespace TestTrackConnector
 
         public bool AttachCommentToTestTrackItem(long id, string comment)
         {
+            this.RefreshConnection();
+
             if (this.connector.IsConnected)
             {
                 return this.connector.AttachComment(id, this.userNameForCreation, comment);
@@ -155,6 +157,29 @@ namespace TestTrackConnector
             }
         }
 
+        public void RefreshConnection()
+        {
+            if (this.connector.IsConnected)
+            {
+                return;
+            }
+
+            try
+            {
+                this.connector.Close();
+
+                if (!this.connector.IsConnected)
+                {
+                    this.connector.ConnectToProject(this.server, this.project, this.userName, this.password);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+
         #endregion
 
         #region Public Methods and Operators
@@ -170,6 +195,8 @@ namespace TestTrackConnector
         /// </returns>
         public List<TestTrackItem> GetMyAssignedDefects()
         {
+            this.RefreshConnection();
+
             if (this.connector.IsConnected)
             {
                 return this.connector.GetAssignedItems();
@@ -189,6 +216,7 @@ namespace TestTrackConnector
         /// </returns>
         public List<TestTrackItem> GetLatestDefects()
         {
+            this.RefreshConnection();
             try
             {
                 if (this.connector.IsConnected)
@@ -229,6 +257,8 @@ namespace TestTrackConnector
 
         public long CreateDefect(string summary, string comments)
         {
+            this.RefreshConnection();
+
             if (this.connector.IsConnected)
             {
                 try
@@ -252,6 +282,8 @@ namespace TestTrackConnector
         /// <returns></returns>
         public TestTrackItem GetDefect(long item)
         {
+            this.RefreshConnection();
+
             if (this.connector.IsConnected)
             {
                 var elem = this.connector.getDefect(item);
