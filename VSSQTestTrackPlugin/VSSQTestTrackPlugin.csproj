@@ -38,9 +38,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DifferenceEngine">
-      <HintPath>..\References\DifferenceEngine.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\References\log4net.dll</HintPath>
     </Reference>
@@ -77,10 +74,6 @@
     <Reference Include="VSSonarPlugins, Version=$(VSSonarExtensionVersion), Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
       <HintPath>..\References\VSSonarPlugins.dll</HintPath>
-    </Reference>
-    <Reference Include="VSSonarQubeCmdExecutor, Version=$(VSSonarExtensionVersion), Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\References\$(FSharpFolder)\VSSonarQubeCmdExecutor.dll</HintPath>
-      <SpecificVersion>True</SpecificVersion>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
