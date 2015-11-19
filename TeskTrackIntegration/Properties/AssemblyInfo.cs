@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jmecsoftware.com")]
 [assembly: AssemblyProduct("TestTrackConnector")]
-[assembly: AssemblyCopyright("Copyright © jmecsoftware.com 2015")]
+[assembly: AssemblyCopyright("Copyright © 2015 jmecsoftware.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -5,36 +5,20 @@
         <!-- Basic settings -->    
         <ReferencesFolder        Condition="'$(ReferencesFolder)'==''">$(MSBuildThisFileDirectory)references</ReferencesFolder>
         <MSBuildFolder           Condition="'$(MSBuildFolder)'==''">$(MSBuildThisFileDirectory)Msbuild</MSBuildFolder>
-        
-        <GallioPath              Condition="'$(GallioPath)'==''">$(MSBuildThisFileDirectory)Msbuild\Gallio</GallioPath>
-        <OpenCoverPath           Condition="'$(OpenCoverPath)'==''">$(MSBuildThisFileDirectory)Msbuild\OpenCover</OpenCoverPath>
-        
+                
+        <LegalCopyright        Condition="'$(LegalCopyright)' == ''">Copyright © 2015 jmecsoftware.com</LegalCopyright>
+        <CompanyName           Condition="'$(CompanyName)' == ''">jmecsoftware.com</CompanyName>
+    
         <!-- Version settings -->
         <MajorVersionNumber           Condition="'$(MajorVersionNumber)'==''">1</MajorVersionNumber>
         <MinorVersionNumber           Condition="'$(MinorVersionNumber)'==''">1</MinorVersionNumber>
         <BuildNumber                  Condition="'$(BuildNumber)'==''">0</BuildNumber>
         <RevisionNumber               Condition="'$(RevisionNumber)'==''">0</RevisionNumber>
         <AssemblyPatcherTaskOn        Condition="'$(AssemblyPatcherTaskOn)'==''">false</AssemblyPatcherTaskOn>
-        <UnitTestsDisabled            Condition="'$(UnitTestsDisabled)'==''">true</UnitTestsDisabled>
-
-        <VSVersion Condition="'$(VSVersion)'==''">$(VisualStudioVersion)</VSVersion>
+        <NunitRunnerTaskEnabled            Condition="'$(NunitRunnerTaskEnabled)'==''">true</NunitRunnerTaskEnabled>
 
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-        
-        <TargetFSharpCoreVersion Condition="'$(VSVersion)'=='11.0'">4.3.1.0</TargetFSharpCoreVersion>
-        <TargetFSharpCoreVersion Condition="'$(VSVersion)'=='12.0'">4.3.1.0</TargetFSharpCoreVersion>
-        <TargetFSharpCoreVersion Condition="'$(VSVersion)'=='14.0'">4.4.0.0</TargetFSharpCoreVersion>
-        
-        <FSharpFolder Condition="'$(TargetFSharpCoreVersion)'=='4.3.1.0'">FSharp431</FSharpFolder>
-        <FSharpFolder Condition="'$(TargetFSharpCoreVersion)'=='4.3.1.0'">FSharp431</FSharpFolder>
-        <FSharpFolder Condition="'$(TargetFSharpCoreVersion)'=='4.4.0.0'">FSharp440</FSharpFolder>
-
-        <OutFolder Condition="'$(VSVersion)'=='11.0'">vs12</OutFolder>
-        <OutFolder Condition="'$(VSVersion)'=='12.0'">vs13</OutFolder>
-        <OutFolder Condition="'$(VSVersion)'=='14.0'">vs15</OutFolder>
-
-
-        <PluginsOutputPath     Condition="'$(PluginsOutputPath)'==''">$(MSBuildThisFileDirectory)BuildDrop\$(OutFolder)\</PluginsOutputPath>
+        <PluginsOutputPath     Condition="'$(PluginsOutputPath)'==''">$(MSBuildThisFileDirectory)BuildDrop\</PluginsOutputPath>
         <OBJDir>$(MSBuildThisFileDirectory)ObjDrop\$(OutFolder)\$(Configuration)\$(TSPlatform)</OBJDir>
         <IntermediateOutputPath>$(OBJDir)$(MSBuildProjectName)\</IntermediateOutputPath>
         

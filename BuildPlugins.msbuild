@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+    <Import Project="$(MSBuildThisFileDirectory)configuration.props" />
     <ItemGroup>
         <Plugins Include="VSSQTestTrackPlugin.sln" />
     </ItemGroup>
 
     <Target Name="BuildPlugins">
-        <MSBuild Projects="@(Plugins)" Properties="Configuration=Release;VSVersion=14.0" BuildInParallel="true" StopOnFirstFailure="true" />
+        <MSBuild Projects="@(Plugins)" Properties="Configuration=Release" BuildInParallel="true" StopOnFirstFailure="true" />
+        <Copy Condition="'$(SkipCopy)'!='Yes'" SourceFiles="$(PluginsOutputPath)/VSSQTestTrackPlugin.VSQ" DestinationFiles="$(EndVSQFile)"/>
     </Target>
     
     <Target Name="Build" DependsOnTargets="BuildPlugins">

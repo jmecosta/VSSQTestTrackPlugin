@@ -22,9 +22,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VSSQTestTrackPlugin.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("jmecsoftware.com")]
+[assembly: AssemblyCompany("Trimble Solutions Corporation")]
 [assembly: AssemblyProduct("VSSQTestTrackPlugin.Test")]
-[assembly: AssemblyCopyright("Copyright © jmecsoftware.com 2015")]
+[assembly: AssemblyCopyright("Copyright © 1992-2015 Trimble Solutions Corporation and its licensors. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -46,5 +46,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2099.1.0.0")]
+[assembly: AssemblyFileVersion("2099.1.0.0")]

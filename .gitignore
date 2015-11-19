@@ -113,3 +113,8 @@ Backup*/
 UpgradeLog*.XML
 
 Settings.StyleCop
+VSSQTestTrackPlugin.VSQ
+BuildDrop/*
+ObjDrop/*
+buildlog2015.txt
+*.unittest.report.xml
