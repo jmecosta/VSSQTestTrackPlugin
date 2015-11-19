@@ -2,10 +2,14 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
     <Import Project="$(MSBuildThisFileDirectory)configuration.props" />
     <ItemGroup>
-        <Plugins Include="VSSQTestTrackPlugin.sln" />
-        <SkipCopy Condition="'$(SkipCopy)'==''">Yes</SkipCopy>
+        <Plugins Include="VSSQTestTrackPlugin.sln" />        
     </ItemGroup>
 
+    <PropertyGroup>
+        <!-- Basic settings -->
+        <SkipCopy Condition="'$(SkipCopy)'==''">Yes</SkipCopy>
+    </PropertyGroup>  
+    
     <Target Name="BuildPlugins">
         <MSBuild Projects="@(Plugins)" Properties="Configuration=Release" BuildInParallel="true" StopOnFirstFailure="true" />
         <Copy Condition="'$(SkipCopy)'!='Yes'" SourceFiles="$(PluginsOutputPath)/VSSQTestTrackPlugin.VSQ" DestinationFiles="$(EndVSQFile)"/>
