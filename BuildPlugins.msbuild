@@ -3,6 +3,7 @@
     <Import Project="$(MSBuildThisFileDirectory)configuration.props" />
     <ItemGroup>
         <Plugins Include="VSSQTestTrackPlugin.sln" />
+        <SkipCopy Condition="'$(SkipCopy)'==''">Yes</SkipCopy>
     </ItemGroup>
 
     <Target Name="BuildPlugins">
