@@ -113,7 +113,7 @@ namespace VSSQTestTrackPlugin
         /// </summary>
         /// <param name="project">The project.</param>
         /// <param name="configuration">The configuration.</param>
-        public void AssociateProject(Resource project, ISonarConfiguration configuration)
+        public void AssociateProject(Resource project, ISonarConfiguration configuration, Dictionary<string, Profile> profiles)
         {
             this.associatedProject = project;
             this.userConf = configuration;
