@@ -22,7 +22,8 @@
         <OBJDir>$(MSBuildThisFileDirectory)ObjDrop\$(OutFolder)\$(Configuration)\$(TSPlatform)</OBJDir>
         <IntermediateOutputPath>$(OBJDir)$(MSBuildProjectName)\</IntermediateOutputPath>
 		
-        <VSSonarExtensionVersion>3Api.5.0.0</VSSonarExtensionVersion>
-		<VSSonarExtensionVersion                                     Condition="'$(VSVersion)'=='14.0'">4Api.5.0.0</VSSonarExtensionVersion>
+		<VSSonarVersion>5.0.1</VSSonarVersion>
+		<VSSonarExtensionVersion>3Api.$(VSSonarVersion)</VSSonarExtensionVersion>
+		<VSSonarExtensionVersion                                     Condition="'$(VSVersion)'=='14.0'">4Api.$(VSSonarVersion)</VSSonarExtensionVersion>
     </PropertyGroup>    
 </Project>
