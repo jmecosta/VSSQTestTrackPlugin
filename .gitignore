@@ -118,3 +118,6 @@ BuildDrop/*
 ObjDrop/*
 buildlog2015.txt
 *.unittest.report.xml
+.cxxresults/**
+.sonarqube/**
+*.coverage.xml
