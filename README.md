@@ -14,10 +14,47 @@ Use Visual Studio and just build, it will produce VSSQTestTrackPlugin.dll.
 
 ## Installation
 
-Copy into Extensions Folder of Visual Studio. Example:
-$(ProFile)\AppData\Local\Microsoft\Visual Studio\11\Extensions
+Use installation manager and install the released VSQ file.
 
 ## Usage
-No additional configuration
+Create a TesttrackSetup.cfg in your home folder with following content, modify the relevant parts
+
+
+Server;http://<your server>/Scripts/ttsoapcgi.exe
+TTStudio;ttstudio://<your server>:99
+Project;<ProjectID>
+FoundInVersion;<VersionFound>
+UserNameToUseForIssueCreation;<>
+Type;Technical coding issue
+Product;Product Development (for PD use only)
+Severity;SonarQube
+State;Open
+Disposition;
+// ===== Maintenance
+CustomStringField; Maintenance;
+// ===== Defective since v.
+CustomDropdownField; Defective since v.; Work
+// ===== ProjectPlan
+CustomDropdownField; ProjectPlan; 
+// ===== Work order
+CustomStringField; Work order; 
+// ===== Release blocker
+CustomDropdownField; Release blocker; 
+// ===== Defect reason
+CustomDropdownField; Defect reason; 
+// ===== SubTeam
+CustomDropdownField; SubTeam; 
+// ===== Reproduced
+CustomDropdownField; Reproduced; Always
+// ===== Maintenance - Area priorities
+CustomStringField; Maintenance - Area priorities; 
+// ===== Component
+CustomDropdownField; Component; Code Analysis
+// ===== SubComponent
+CustomDropdownField; SubComponent; Other
+// ===== Effect on usage
+CustomDropdownField; Effect on usage; No workaround, work discontinued
+// ===== Severity
+CustomDropdownField; Severity; 
 
 

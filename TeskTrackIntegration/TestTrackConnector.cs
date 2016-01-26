@@ -27,6 +27,11 @@ namespace TestTrackConnector
     public class TestTrackConnector
     {
         /// <summary>
+        /// The configuration file
+        /// </summary>
+        private readonly string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "TesttrackSetup.cfg");
+
+        /// <summary>
         /// The execution path
         /// </summary>
         private readonly string executionPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase.Replace("file:///", string.Empty));
@@ -65,6 +70,10 @@ namespace TestTrackConnector
         /// The password
         /// </summary>
         private string password;
+
+        /// <summary>
+        /// The ttstudioaddress
+        /// </summary>
         private string ttstudioaddress;
 
         #region Constructors and Destructors
@@ -100,7 +109,8 @@ namespace TestTrackConnector
                 {
                     this.server = "";
                     this.project = "";
-                    if (File.Exists(Path.Combine(executionPath, "TesttrackSetup.cfg")))
+                    
+                    if (File.Exists(configFile))
                     {
                         this.GetServerAndProject();
                     }
@@ -266,7 +276,7 @@ namespace TestTrackConnector
             {
                 try
                 {
-                    var def = new TtDefect("Buildmaster", "Work", summary, comments);
+                    var def = new TtDefect(this.userNameForCreation, this.foundInVersion, summary, comments);
                     this.connector.EnableFormattedTextSupport();
                     return this.connector.CreateDefect(def.GetDefect());
                 }
@@ -275,7 +285,7 @@ namespace TestTrackConnector
                     Debug.WriteLine(ex.Message);
                     this.RefreshConnection(true);
                     this.connector.EnableFormattedTextSupport();
-                    var def = new TtDefect("Buildmaster", "Work", summary, comments);
+                    var def = new TtDefect(this.userNameForCreation, this.foundInVersion, summary, comments);
                     return this.connector.CreateDefect(def.GetDefect());                    
                 }
             }
@@ -343,7 +353,7 @@ namespace TestTrackConnector
         /// <param name="project">The project.</param>
         private void GetServerAndProject()
         {
-            foreach (var line in File.ReadAllLines(Path.Combine(executionPath, "TesttrackSetup.cfg")))
+            foreach (var line in File.ReadAllLines(this.configFile))
             {
                 var elems = line.Split(';');
                 if (line.Trim().StartsWith("Server"))
