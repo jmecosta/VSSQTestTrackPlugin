@@ -19,7 +19,7 @@ Use installation manager and install the released VSQ file.
 ## Usage
 Create a TesttrackSetup.cfg in your home folder with following content, modify the relevant parts
 
-
+```
 Server;http://<your server>/Scripts/ttsoapcgi.exe
 TTStudio;ttstudio://<your server>:99
 Project;<ProjectID>
@@ -56,5 +56,5 @@ CustomDropdownField; SubComponent; Other
 CustomDropdownField; Effect on usage; No workaround, work discontinued
 // ===== Severity
 CustomDropdownField; Severity; 
-
+```
 
