@@ -10,7 +10,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 
 ## How to compile
-Use Visual Studio and just build, it will produce VSSQTestTrackPlugin.dll.
+Use Visual Studio and just build, it will produce VSSQTestTrackPlugin.VSQ.
 
 ## Installation
 
