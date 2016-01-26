@@ -145,7 +145,6 @@ namespace TestTrackConnector
             this.timeD = CreateDefaultCDefect(username, foundinversion, summary, comments);
         }
 
-
         private CDefect CreateDefaultCDefect(string username, string foundinversion, string summary, string comments)
         {
             var defectInd = new CDefect();

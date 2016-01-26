@@ -119,7 +119,7 @@ namespace TestTrackConnector
 
         public bool AttachCommentToTestTrackItem(long id, string comment)
         {
-            this.RefreshConnection();
+            this.RefreshConnection(false);
 
             if (this.connector.IsConnected)
             {
@@ -157,11 +157,14 @@ namespace TestTrackConnector
             }
         }
 
-        public void RefreshConnection()
+        public void RefreshConnection(bool force)
         {
-            if (this.connector.IsConnected)
+            if (!force)
             {
-                return;
+                if (this.connector.IsConnected)
+                {
+                    return;
+                }
             }
 
             try
@@ -195,7 +198,7 @@ namespace TestTrackConnector
         /// </returns>
         public List<TestTrackItem> GetMyAssignedDefects()
         {
-            this.RefreshConnection();
+            this.RefreshConnection(false);
 
             if (this.connector.IsConnected)
             {
@@ -216,7 +219,7 @@ namespace TestTrackConnector
         /// </returns>
         public List<TestTrackItem> GetLatestDefects()
         {
-            this.RefreshConnection();
+            this.RefreshConnection(false);
             try
             {
                 if (this.connector.IsConnected)
@@ -257,22 +260,48 @@ namespace TestTrackConnector
 
         public long CreateDefect(string summary, string comments)
         {
-            this.RefreshConnection();
+            this.RefreshConnection(false);
 
             if (this.connector.IsConnected)
             {
                 try
                 {
                     var def = new TtDefect("Buildmaster", "Work", summary, comments);
+                    this.connector.EnableFormattedTextSupport();
                     return this.connector.CreateDefect(def.GetDefect());
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
+                    this.RefreshConnection(true);
+                    this.connector.EnableFormattedTextSupport();
+                    var def = new TtDefect("Buildmaster", "Work", summary, comments);
+                    return this.connector.CreateDefect(def.GetDefect());                    
                 }
             }
 
             return -1;
+        }
+
+
+        private string ReadFromFile(string value)
+        {
+            if (!File.Exists(value))
+                throw new FileNotFoundException("Comment file \"" + value + "\" was not found.");
+
+            string commentstring = "";
+            try
+            {
+                using (StreamReader sr = new StreamReader(value))
+                {
+                    commentstring = sr.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while reading comment file \"" + value + "\". " + ex.Message);
+            }
+            return commentstring;
         }
 
         /// <summary>
@@ -282,7 +311,7 @@ namespace TestTrackConnector
         /// <returns></returns>
         public TestTrackItem GetDefect(long item)
         {
-            this.RefreshConnection();
+            this.RefreshConnection(false);
 
             if (this.connector.IsConnected)
             {
