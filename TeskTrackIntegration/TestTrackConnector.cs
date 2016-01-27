@@ -133,7 +133,16 @@ namespace TestTrackConnector
 
             if (this.connector.IsConnected)
             {
-                return this.connector.AttachComment(id, this.userNameForCreation, comment);
+                try
+                {
+                    return this.connector.AttachComment(id, this.userNameForCreation, comment);
+                }
+                catch (Exception)
+                {
+                    this.RefreshConnection(true);
+                    this.connector.EnableFormattedTextSupport();
+                    return this.connector.AttachComment(id, this.userNameForCreation, comment);
+                }                
             }
 
             return false;

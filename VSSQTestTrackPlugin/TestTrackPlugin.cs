@@ -146,7 +146,7 @@ namespace VSSQTestTrackPlugin
                 return string.Empty;
             }
 
-            var notes = this.GatherNotesFormTestTrack(issues, this.associatedProject);
+            var notes = this.GatherNotesFormTestTrackInPlainText(issues, this.associatedProject);
             if (this.testTrackIntegration.AttachCommentToTestTrackItem(long.Parse(defectId), notes))
             {
                 return this.testTrackIntegration.GetUrlForDefect(long.Parse(defectId));
@@ -413,5 +413,57 @@ namespace VSSQTestTrackPlugin
 
             return notes.ToString();
         }
+
+        /// <summary>
+        /// Gathers the notes form test track.
+        /// </summary>
+        /// <param name="issues">The issues.</param>
+        /// <returns></returns>
+        private string GatherNotesFormTestTrackInPlainText(IList<Issue> issues, Resource project)
+        {
+            this.NumberOfBlockers = 0;
+            this.NumberOfCriticals = 0;
+            this.NumberOfMajors = 0;
+            this.TechnicalDebt = 0;
+
+            StringBuilder notes = new StringBuilder();
+            notes.AppendLine("Issues are pending resolution:");
+            notes.AppendLine("");
+            notes.AppendLine("Project : " + project.SolutionName + " : Key : " + project.Key);
+
+
+            HashSet<string> plans = new HashSet<string>();
+
+            foreach (var issue in issues)
+            {
+                var compElelms = issue.Component.Split(':');
+                var data = "    [" + issue.Assignee + "] " + issue.Message + " : " + compElelms[compElelms.Length - 1] + " : " + issue.Line + " : ";
+                notes.AppendLine("    " + data + " => " + this.userConf.Hostname.TrimEnd('/') + "/issues/search#issues=" + issue.Key);
+                this.PopulateStatistics(issue);
+
+                if (!string.IsNullOrEmpty(issue.ActionPlan) && !plans.Contains(issue.ActionPlan + "|" + issue.Assignee))
+                {
+                    plans.Add(issue.ActionPlan + "|assignees=" + issue.Assignee);
+                }
+            }
+
+            if (plans.Count != 0)
+            {
+                notes.AppendLine("");
+                notes.AppendLine("The above issues are contained in the following action plans:");
+                int i = 1;
+                foreach (var plan in plans)
+                {
+                    var url = this.userConf.Hostname.TrimEnd('/') + "/issues/search#actionPlans=" + plan;
+                    notes.AppendLine("    " + i.ToString() + " : " + url);
+                    i++;
+                }
+            }
+
+            notes.AppendLine("");
+            var summary = "Issues: " + issues.Count + " Blockers: " + this.NumberOfBlockers + " Critical: " + this.NumberOfCriticals + " Majors: " + this.NumberOfMajors + " Debt: " + this.TechnicalDebt + " mn";
+            notes.AppendLine(summary);
+            return notes.ToString();
+        }        
     }
 }
