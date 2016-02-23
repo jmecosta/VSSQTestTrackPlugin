@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Trimble Solutions Corporation")]
 [assembly: AssemblyProduct("TestTrackIntegration.Test")]
-[assembly: AssemblyCopyright("Copyright © 1992-2015 Trimble Solutions Corporation and its licensors. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 1992-2016 Trimble Solutions Corporation and its licensors. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
