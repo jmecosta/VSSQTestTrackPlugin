@@ -65,6 +65,23 @@ namespace VSSQTestTrackPlugin
         /// Initializes a new instance of the <see cref="SQGitPlugin" /> class.
         /// </summary>
         /// <param name="notificationManager">The notification manager.</param>
+        public TestTrackPlugin(INotificationManager notificationManager, ISonarConfiguration configuration)
+        {
+            this.userConf = configuration;
+            this.notificationManager = notificationManager;
+            this.descrition = new PluginDescription();
+            this.descrition.Enabled = true;
+            this.descrition.Description = "TestTrack Plugin";
+            this.descrition.Name = "TestTrack Plugin";
+            this.descrition.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.descrition.AssemblyPath = Assembly.GetExecutingAssembly().Location;
+            this.testTrackIntegration = new TestTrackConnector(configuration.Username, configuration.Password, true, new TtConnection());
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestTrackPlugin"/> class.
+        /// </summary>
+        /// <param name="notificationManager">The notification manager.</param>
         public TestTrackPlugin(INotificationManager notificationManager)
         {
             this.notificationManager = notificationManager;
@@ -168,11 +185,12 @@ namespace VSSQTestTrackPlugin
                 return string.Empty;
             }
 
-            string notes = GatherNotesFormTestTrack(issues, this.associatedProject);
+            var summary = string.Empty;
+            string notes = GatherNotesFormTestTrack(issues, this.associatedProject, out summary);
 
             try
             {
-                var defect = this.testTrackIntegration.CreateDefect("SonarQube: Issues Pending Resolution [from VSSonarExtension]", notes.ToString());
+                var defect = this.testTrackIntegration.CreateDefect("SonarQube: Issues Pending Resolution [from VSSonarExtension] " + summary, notes.ToString());
                 if (defect != -1)
                 {
                     id = defect.ToString();
@@ -364,7 +382,7 @@ namespace VSSQTestTrackPlugin
         /// </summary>
         /// <param name="issues">The issues.</param>
         /// <returns></returns>
-        private string GatherNotesFormTestTrack(IList<Issue> issues, Resource project)
+        private string GatherNotesFormTestTrack(IList<Issue> issues, Resource project, out string summaryOut)
         {
             this.NumberOfBlockers = 0;
             this.NumberOfCriticals = 0;
@@ -374,7 +392,15 @@ namespace VSSQTestTrackPlugin
             StringBuilder notes = new StringBuilder();
             notes.AppendLine("<p align=\"left\"><span style=\" font-size:12pt; color:#3366ff;\">Issues are pending resolution</span></p>");
             notes.AppendLine("<hr />");
-            notes.AppendLine("<p> Project : " + project.SolutionName + " : Key : " + project.Key);
+            if (project != null)
+            {
+                notes.AppendLine("<p> Project : " + project.SolutionName + " : Key : " + project.Key);
+            }
+            else
+            {
+                notes.AppendLine("<p> Project : Multiple Projects" );
+            }
+
             notes.AppendLine("<hr />");
 
             HashSet<string> plans = new HashSet<string>();
@@ -406,7 +432,8 @@ namespace VSSQTestTrackPlugin
             }
 
             notes.AppendLine("<hr />");
-            var summary = "<p>Issues: " + issues.Count + " Blockers: " + this.NumberOfBlockers + " Critical: " + this.NumberOfCriticals + " Majors: " + this.NumberOfMajors + " Debt: " + this.TechnicalDebt + " mn</p>";
+            summaryOut = "Issues: " + issues.Count + " => Blockers: " + this.NumberOfBlockers + " Critical: " + this.NumberOfCriticals + " Majors: " + this.NumberOfMajors + " Debt: " + this.TechnicalDebt + " mn";
+            var summary = "<p>Issues: " + issues.Count + " => Blockers: " + this.NumberOfBlockers + " Critical: " + this.NumberOfCriticals + " Majors: " + this.NumberOfMajors + " Debt: " + this.TechnicalDebt + " mn</p>";
             notes.AppendLine(summary);
 
             notes.AppendLine("<p><br /> </p>");
@@ -429,8 +456,11 @@ namespace VSSQTestTrackPlugin
             StringBuilder notes = new StringBuilder();
             notes.AppendLine("Issues are pending resolution:");
             notes.AppendLine("");
-            notes.AppendLine("Project : " + project.SolutionName + " : Key : " + project.Key);
 
+            if (project != null)
+            {
+                notes.AppendLine("Project : " + project.SolutionName + " : Key : " + project.Key);
+            }
 
             HashSet<string> plans = new HashSet<string>();
 

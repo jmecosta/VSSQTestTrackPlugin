@@ -129,12 +129,13 @@ namespace TestTrackConnector
             this.defect.eventlist = new CEvent[0];
             this.defect.pSCCFileList = new CSCCFileRecord[0];
             var customfields = new List<CField>();
+            var homeEnvironment = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
-            if (File.Exists(Path.Combine(executionPath, "TesttrackSetup.cfg")))
+            if (File.Exists(Path.Combine(homeEnvironment, "TesttrackSetup.cfg")))
             {
 
                 CreateRecordFromConfigurationFile(
-                    File.ReadAllLines(Path.Combine(executionPath, "TesttrackSetup.cfg")),
+                    File.ReadAllLines(Path.Combine(homeEnvironment, "TesttrackSetup.cfg")),
                     this.defect,
                     customfields);
 
