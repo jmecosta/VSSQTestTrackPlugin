@@ -78,7 +78,7 @@ namespace TestTrackIntegration.Test
         public void CorrectlyCreatesConfigurationFromFile()
         {
             var connectionMock = new Mock<IIssueManagementConnection>();
-            var defect = new TtDefect("user", "version", "summary", "comment");
+            var defect = new TtDefect("user", "version", "summary", "comment", Path.Combine(executionPath, "TesttrackSetup.cfg"), true);
             Assert.That(defect.GetDefect().type, Is.EqualTo("Incorrect functionality"));
             Assert.That(defect.GetDefect().product, Is.EqualTo("Product Data"));
             Assert.That(defect.GetDefect().severity, Is.EqualTo("Automated Testing"));

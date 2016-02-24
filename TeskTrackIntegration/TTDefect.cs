@@ -44,7 +44,12 @@ namespace TestTrackConnector
         ///     The _ defect.
         /// </summary>
         private CDefect defect;
+
+        /// <summary>
+        /// The time d
+        /// </summary>
         private CDefect timeD;
+        private readonly string externalConfigFile;
 
         #endregion
 
@@ -106,6 +111,21 @@ namespace TestTrackConnector
         /// <summary>
         /// Initializes a new instance of the <see cref="TtDefect"/> class.
         /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="foundinversion">The foundinversion.</param>
+        /// <param name="summary">The summary.</param>
+        /// <param name="comments">The comments.</param>
+        /// <param name="getHomeFile">if set to <c>true</c> [get home file].</param>
+        /// <param name="configFile">The configuration file.</param>
+        public TtDefect(string username, string foundinversion, string summary, string comments, string configFile, bool getHomeFile = true)
+        {
+            this.externalConfigFile = configFile;
+            CreteDefaultDefect(username, foundinversion, summary, comments, getHomeFile);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TtDefect"/> class.
+        /// </summary>
         /// <param name="username">
         /// The username.
         /// </param>
@@ -118,7 +138,20 @@ namespace TestTrackConnector
         /// <param name="comments">
         /// The comments.
         /// </param>
-        public TtDefect(string username, string foundinversion, string summary, string comments)
+        public TtDefect(string username, string foundinversion, string summary, string comments, bool getHomeFile = true)
+        {
+            CreteDefaultDefect(username, foundinversion, summary, comments, getHomeFile);
+        }
+
+        /// <summary>
+        /// Cretes the default defect.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="foundinversion">The foundinversion.</param>
+        /// <param name="summary">The summary.</param>
+        /// <param name="comments">The comments.</param>
+        /// <param name="getHomeFile">if set to <c>true</c> [get home file].</param>
+        private void CreteDefaultDefect(string username, string foundinversion, string summary, string comments, bool getHomeFile)
         {
             this.defect = new CDefect();
             this.SetCustomValues(username, summary);
@@ -131,14 +164,23 @@ namespace TestTrackConnector
             var customfields = new List<CField>();
             var homeEnvironment = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
-            if (File.Exists(Path.Combine(homeEnvironment, "TesttrackSetup.cfg")))
+            if (File.Exists(this.externalConfigFile))
             {
-
                 CreateRecordFromConfigurationFile(
-                    File.ReadAllLines(Path.Combine(homeEnvironment, "TesttrackSetup.cfg")),
+                    File.ReadAllLines(this.externalConfigFile),
                     this.defect,
                     customfields);
+            }
+            else
+            {
+                if (File.Exists(Path.Combine(homeEnvironment, "TesttrackSetup.cfg")) && getHomeFile)
+                {
 
+                    CreateRecordFromConfigurationFile(
+                        File.ReadAllLines(Path.Combine(homeEnvironment, "TesttrackSetup.cfg")),
+                        this.defect,
+                        customfields);
+                }
             }
 
             this.defect.customFieldList = customfields.ToArray();
