@@ -138,6 +138,15 @@ namespace VSSQTestTrackPlugin
         }
 
         /// <summary>
+        /// Called when [connect to sonar].
+        /// </summary>
+        /// <param name="config">The configuration.</param>
+        public void OnConnectToSonar(ISonarConfiguration config)
+        {
+            // nothing
+        }
+
+        /// <summary>
         /// Associates the project.
         /// </summary>
         /// <param name="project">The project.</param>
