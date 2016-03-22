@@ -11,7 +11,7 @@
     </PropertyGroup>  
     
     <Target Name="BuildPlugins">
-        <MSBuild Projects="@(Plugins)" Properties="Configuration=Release" BuildInParallel="true" StopOnFirstFailure="true" />
+        <MSBuild Projects="@(Plugins)" Properties="Configuration=Debug" BuildInParallel="true" StopOnFirstFailure="true" />
         <Copy Condition="'$(SkipCopy)'!='Yes'" SourceFiles="$(PluginsOutputPath)/VSSQTestTrackPlugin.VSQ" DestinationFiles="$(EndVSQFile)"/>
     </Target>
     
