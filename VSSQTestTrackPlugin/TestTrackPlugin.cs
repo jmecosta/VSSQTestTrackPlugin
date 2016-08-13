@@ -372,11 +372,11 @@ namespace VSSQTestTrackPlugin
                     break;
             }
 
-            if (!string.IsNullOrEmpty(issue.Debt))
+            if (!string.IsNullOrEmpty(issue.Effort))
             {
                 try
                 {
-                    var debt = issue.Debt.Replace("min", "").Replace("sec", "").Replace("hour", "").Replace("day", "").Replace("d", "").Replace("h", "");
+                    var debt = issue.Effort.Replace("min", "").Replace("sec", "").Replace("hour", "").Replace("day", "").Replace("d", "").Replace("h", "");
                     this.TechnicalDebt += int.Parse(debt);
                 }
                 catch (Exception ex)
@@ -420,24 +420,6 @@ namespace VSSQTestTrackPlugin
                 var url = "    [" + issue.Assignee + "] " + issue.Message + " : " + compElelms[compElelms.Length - 1] + " : " + issue.Line + " : ";
                 notes.AppendLine("<p>    " + url + "<a href=\"" + this.userConf.Hostname.TrimEnd('/') + "/issues/search#issues=" + issue.Key + "\">See in SonarQube</a></p>");
                 this.PopulateStatistics(issue);
-
-                if (!string.IsNullOrEmpty(issue.ActionPlan) && !plans.Contains(issue.ActionPlan + "|" + issue.Assignee))
-                {
-                    plans.Add(issue.ActionPlan + "|assignees=" + issue.Assignee);
-                }
-            }
-
-            if (plans.Count != 0)
-            {
-                notes.AppendLine("<hr />");
-                notes.AppendLine("<p>The above issues are contained in the following action plans:</p>");
-                int i = 1;
-                foreach (var plan in plans)
-                {
-                    var url = this.userConf.Hostname.TrimEnd('/') + "/issues/search#actionPlans=" + plan;
-                    notes.AppendLine("    " + i.ToString() + " : <a href=\"" + url + "\">See in SonarQube</a>");
-                    i++;
-                }
             }
 
             notes.AppendLine("<hr />");
@@ -479,11 +461,6 @@ namespace VSSQTestTrackPlugin
                 var data = "    [" + issue.Assignee + "] " + issue.Message + " : " + compElelms[compElelms.Length - 1] + " : " + issue.Line + " : ";
                 notes.AppendLine("    " + data + " => " + this.userConf.Hostname.TrimEnd('/') + "/issues/search#issues=" + issue.Key);
                 this.PopulateStatistics(issue);
-
-                if (!string.IsNullOrEmpty(issue.ActionPlan) && !plans.Contains(issue.ActionPlan + "|" + issue.Assignee))
-                {
-                    plans.Add(issue.ActionPlan + "|assignees=" + issue.Assignee);
-                }
             }
 
             if (plans.Count != 0)
