@@ -90,19 +90,12 @@ namespace TestTrackConnector
         public TestTrackConnector(string userName, string password, bool forceConnection, IIssueManagementConnection connector)
         {
             this.connector = connector;
-            this.userName = userName;
-            this.password = password;
 
             try
             {
                 if (forceConnection)
                 {
                     connector.Close();
-                }
-
-                if (userName == null)
-                {
-                    return;
                 }
 
                 if (!connector.IsConnected)
@@ -115,10 +108,8 @@ namespace TestTrackConnector
                         this.GetServerAndProject();
                     }
 
-                    connector.ConnectToProject(this.server, this.project, this.userName, password);
+                    connector.ConnectToProject(this.server, this.project, this.userName, this.password);
                 }
-
-                this.userName = userName;
             }
             catch (Exception ex)
             {
@@ -153,26 +144,6 @@ namespace TestTrackConnector
             if (this.connector.IsConnected)
             {
                 this.connector.Close();
-            }
-        }
-
-        public void RefreshConnection(string username, string passwordIn)
-        {
-            this.userName = username;
-            this.password = passwordIn;
-
-            try
-            {
-                this.connector.Close();
-
-                if (!this.connector.IsConnected)
-                {
-                    this.connector.ConnectToProject(this.server, this.project, this.userName, this.password);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -364,7 +335,33 @@ namespace TestTrackConnector
         {
             foreach (var line in File.ReadAllLines(this.configFile))
             {
+
                 var elems = line.Split(';');
+
+                if (line.Trim().StartsWith("UserName;"))
+                {
+                    try
+                    {
+                        this.userName = elems[1].Trim();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                }
+
+                if (line.Trim().StartsWith("Password"))
+                {
+                    try
+                    {
+                        this.password = elems[1].Trim();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                }
+
                 if (line.Trim().StartsWith("Server"))
                 {
                     try

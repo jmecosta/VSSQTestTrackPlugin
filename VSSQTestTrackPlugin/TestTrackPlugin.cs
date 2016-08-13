@@ -143,7 +143,8 @@ namespace VSSQTestTrackPlugin
         /// <param name="config">The configuration.</param>
         public void OnConnectToSonar(ISonarConfiguration config)
         {
-            // nothing
+            this.userConf = config;
+            this.testTrackIntegration = new TestTrackConnector(config.Username, config.Password, true, new TtConnection());
         }
 
         /// <summary>
