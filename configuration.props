@@ -10,11 +10,11 @@
         <CompanyName           Condition="'$(CompanyName)' == ''">jmecsoftware.com</CompanyName>
     
         <!-- Version settings -->
-        <MajorVersionNumber           Condition="'$(MajorVersionNumber)'==''">5</MajorVersionNumber>
+        <MajorVersionNumber           Condition="'$(MajorVersionNumber)'==''">6</MajorVersionNumber>
         <MinorVersionNumber           Condition="'$(MinorVersionNumber)'==''">0</MinorVersionNumber>
         <BuildNumber                  Condition="'$(BuildNumber)'==''">0</BuildNumber>
         <RevisionNumber               Condition="'$(RevisionNumber)'==''">0</RevisionNumber>
-        <AssemblyPatcherTaskOn        Condition="'$(AssemblyPatcherTaskOn)'==''">false</AssemblyPatcherTaskOn>
+        <AssemblyPatcherTaskOn        Condition="'$(AssemblyPatcherTaskOn)'==''">true</AssemblyPatcherTaskOn>
         <NunitRunnerTaskEnabled            Condition="'$(NunitRunnerTaskEnabled)'==''">true</NunitRunnerTaskEnabled>
 
         <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -22,8 +22,9 @@
         <OBJDir>$(MSBuildThisFileDirectory)ObjDrop\$(OutFolder)\$(Configuration)\$(TSPlatform)</OBJDir>
         <IntermediateOutputPath>$(OBJDir)$(MSBuildProjectName)\</IntermediateOutputPath>
 		
-		<VSSonarVersion>5.3.0</VSSonarVersion>
+		<VSSonarVersion>6.0.1</VSSonarVersion>
 		<VSSonarExtensionVersion>3Api.$(VSSonarVersion)</VSSonarExtensionVersion>
 		<VSSonarExtensionVersion                                     Condition="'$(VSVersion)'=='14.0'">4Api.$(VSSonarVersion)</VSSonarExtensionVersion>
+        <VSSonarExtensionVersion                                     Condition="'$(VSVersion)'=='15.0'">41Api.$(VSSonarVersion)</VSSonarExtensionVersion>
     </PropertyGroup>    
 </Project>

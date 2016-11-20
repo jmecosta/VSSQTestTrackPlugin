@@ -306,16 +306,6 @@ namespace VSSQTestTrackPlugin
         }
 
         /// <summary>
-        /// Gets the licenses.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        /// <returns></returns>
-        public Dictionary<string, VsLicense> GetLicenses(ISonarConfiguration configuration)
-        {
-            return null;
-        }
-
-        /// <summary>
         /// Gets the plugin control options.
         /// </summary>
         /// <param name="project">The project.</param>
