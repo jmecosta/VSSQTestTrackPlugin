@@ -46,7 +46,7 @@ namespace SQGitPlugin.Test
             var mockConnection = new Mock<ISonarConfiguration>();
             using (var plugin = new TestTrackPlugin(mockNote.Object, mockConnection.Object))
             {
-                plugin.AssociateProject(new Resource(), mockConnection.Object, mockIssueManager.Object);
+                plugin.AssociateProject(new Resource(), mockConnection.Object, mockIssueManager.Object, "14.0");
                 var defect = plugin.GetDefectFromCommitMessage("Merge pull request #7041 in sadas/adasda from feature/114530-sdas-dsadsa to master * commit '2d626b959b2ce919fd67efd28d607c7e0768c1e7': 114530 dsasda");
                 Assert.That(defect.Id, Is.EqualTo("114530"));
                 defect = plugin.GetDefectFromCommitMessage("Merge pull request #7041 in sadas/adasda from bugfix/114530-sdas-dsadsa to master * commit '2d626b959b2ce919fd67efd28d607c7e0768c1e7': 114530 dsasda");
